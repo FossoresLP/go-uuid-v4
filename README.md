@@ -4,7 +4,7 @@ This package contains a *minimal* implementation of UUIDv4 in Go.
 
 Consider using either [Google's implementation](https://github.com/google/uuid) or [this one by Satori](https://github.com/satori/go.uuid) if you need additional features.
 
-*This package can only generate UUIDs using version 4 as defined in [RFC 4122](http://tools.ietf.org/html/rfc4122)*
+*This package can only generate version 4 UUIDs as defined in [RFC 4122](http://tools.ietf.org/html/rfc4122)*
 
 Create a new UUID: `uuid.New() (UUID, error)`
 
