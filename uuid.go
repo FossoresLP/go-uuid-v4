@@ -80,6 +80,11 @@ func NewString() (string, error) {
 	return uuid.ToString(), nil
 }
 
+// IsEmpty returns if the UUID contains only zeros and is therefore empty and invalid
+func (uuid *UUID) IsEmpty() bool {
+	return *uuid == [16]byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}
+}
+
 // MarshalText provides encoding.TextMarshaler
 func (uuid UUID) MarshalText() ([]byte, error) {
 	return []byte(uuid.ToString()), nil

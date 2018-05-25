@@ -14,4 +14,6 @@ Do both in one step: `uuid.NewString() (string, error)`
 
 Convert a string to a UUID: `uuid.Parse(string) (UUID, error)`
 
+Check if UUID contains only zeros: `UUID.IsEmpty() bool`
+
 Both `encoding.Text(Un)Marshaler` and `encoding.Binary(Un)Marshaler` are supported to ensure compatibility with databases and data exchange formats.
