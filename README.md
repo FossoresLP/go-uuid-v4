@@ -8,11 +8,13 @@ Consider using either [Google's implementation](https://github.com/google/uuid) 
 
 Create a new UUID: `uuid.New() (UUID, error)`
 
-Convert a UUID to a string: `UUID.ToString() string`
+Convert an UUID to a string: `UUID.ToString() string`
 
 Do both in one step: `uuid.NewString() (string, error)`
 
-Convert a string to a UUID: `uuid.Parse(string) (UUID, error)`
+Convert a string to an UUID: `uuid.Parse(string) (UUID, error)`
+
+Convert a byte slice to an UUID: `uuid.ParseBytes([]byte) (UUID, error)`
 
 Check if UUID contains only zeros: `UUID.IsEmpty() bool`
 

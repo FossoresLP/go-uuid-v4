@@ -46,6 +46,15 @@ func Parse(str string) (uuid UUID, err error) {
 	return
 }
 
+// ParseBytes parses a byte slice and returns the contained UUID or an error
+func ParseBytes(bytes []byte) (uuid UUID, err error) {
+	if len(bytes) != 16 {
+		return uuid, fmt.Errorf("Invalid length for binary UUID: %d", len(bytes))
+	}
+	copy(uuid[:], bytes)
+	return
+}
+
 // New generates a new UUID v4 using a secure random number generator chosen by GoLang
 func New() (uuid UUID, err error) {
 	_, err = rand.Read(uuid[:])
@@ -108,7 +117,7 @@ func (uuid UUID) MarshalBinary() ([]byte, error) {
 // UnmarshalBinary provides encoding.BinaryUnmarshaler
 func (uuid *UUID) UnmarshalBinary(in []byte) error {
 	if len(in) != 16 {
-		return fmt.Errorf("Invalid length for UUID: %d", len(in))
+		return fmt.Errorf("Invalid length for binary UUID: %d", len(in))
 	}
 	copy(uuid[:], in)
 	return nil
