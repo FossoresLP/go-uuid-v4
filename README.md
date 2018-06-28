@@ -1,5 +1,6 @@
 Go UUIDv4
 =========
+
 This package contains a *minimal* implementation of UUIDv4 in Go.
 
 Consider using either [Google's implementation](https://github.com/google/uuid) or [this one by Satori](https://github.com/satori/go.uuid) if you need additional features.
@@ -8,7 +9,7 @@ Consider using either [Google's implementation](https://github.com/google/uuid) 
 
 Create a new UUID: `uuid.New() (UUID, error)`
 
-Convert an UUID to a string: `UUID.ToString() string`
+Convert an UUID to a string: `UUID.String() string`
 
 Do both in one step: `uuid.NewString() (string, error)`
 

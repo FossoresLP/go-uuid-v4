@@ -67,7 +67,7 @@ func New() (uuid UUID, err error) {
 }
 
 // ToString returns the string representation of a UUID
-func (uuid *UUID) ToString() (out string) {
+func (uuid *UUID) String() (out string) {
 	out += hex.EncodeToString(uuid[:4])
 	out += "-"
 	out += hex.EncodeToString(uuid[4:6])
@@ -86,7 +86,7 @@ func NewString() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return uuid.ToString(), nil
+	return uuid.String(), nil
 }
 
 // IsEmpty returns if the UUID contains only zeros and is therefore empty and invalid
@@ -96,7 +96,7 @@ func (uuid *UUID) IsEmpty() bool {
 
 // MarshalText provides encoding.TextMarshaler
 func (uuid UUID) MarshalText() ([]byte, error) {
-	return []byte(uuid.ToString()), nil
+	return []byte(uuid.String()), nil
 }
 
 // UnmarshalText provides encoding.TextUnmarshaler
