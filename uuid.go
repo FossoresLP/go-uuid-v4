@@ -46,7 +46,7 @@ func Parse(str string) (uuid UUID, err error) {
 	return
 }
 
-// ParseBytes parses a byte slice and returns the contained UUID or an error
+// ParseBytes parses a byte slice and returns the contained BINARY UUID or an error
 func ParseBytes(bytes []byte) (uuid UUID, err error) {
 	if len(bytes) != 16 {
 		return uuid, fmt.Errorf("Invalid length for binary UUID: %d", len(bytes))

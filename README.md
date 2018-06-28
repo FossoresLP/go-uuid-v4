@@ -1,6 +1,8 @@
 Go UUIDv4
 =========
 
+[![CircleCI branch](https://img.shields.io/circleci/project/github/FossoresLP/go-uuid-v4/master.svg?style=flat-square)](https://circleci.com/gh/FossoresLP/go-uuid-v4)
+
 This package contains a *minimal* implementation of UUIDv4 in Go.
 
 Consider using either [Google's implementation](https://github.com/google/uuid) or [this one by Satori](https://github.com/satori/go.uuid) if you need additional features.
