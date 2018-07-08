@@ -1,7 +1,11 @@
 Go UUIDv4
 =========
 
-[![CircleCI branch](https://img.shields.io/circleci/project/github/FossoresLP/go-uuid-v4/master.svg?style=flat-square)](https://circleci.com/gh/FossoresLP/go-uuid-v4)
+[![CircleCI](https://img.shields.io/circleci/project/github/FossoresLP/go-uuid-v4/master.svg?style=flat-square)](https://circleci.com/gh/FossoresLP/go-uuid-v4)
+[![Coveralls](https://img.shields.io/coveralls/github/FossoresLP/go-uuid-v4/master.svg?style=flat-square)](https://coveralls.io/github/FossoresLP/go-uuid-v4)
+[![Codacy](https://img.shields.io/codacy/grade/146eef6b23314b74a0a3a47d106a388d.svg?style=flat-square)](https://www.codacy.com/app/FossoresLP/go-uuid-v4)
+[![Licensed under: Boost Software License](https://img.shields.io/badge/style-BSL--1.0-red.svg?longCache=true&style=flat-square&label=License)](https://github.com/FossoresLP/go-uuid-v4/blob/master/LICENSE.md)
+[![GoDoc](https://img.shields.io/badge/style-reference-blue.svg?longCache=true&style=flat-square&label=GoDoc)](https://godoc.org/github.com/FossoresLP/go-uuid-v4)
 
 This package contains a *minimal* implementation of UUIDv4 in Go.
 
