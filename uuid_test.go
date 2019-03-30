@@ -1,6 +1,8 @@
 package uuid
 
 import (
+	"bytes"
+	"crypto/rand"
 	"reflect"
 	"testing"
 )
@@ -75,6 +77,13 @@ func TestNew(t *testing.T) {
 	if err != nil {
 		t.Errorf("Failed to generate UUID. Random generator failed: %s", err.Error())
 	}
+	random := rand.Reader
+	rand.Reader = bytes.NewBuffer(nil)
+	_, err = New()
+	if err == nil {
+		t.Error("New did not fail when no random data was available")
+	}
+	rand.Reader = random
 }
 
 func TestUUID_String(t *testing.T) {
@@ -105,6 +114,13 @@ func TestNewString(t *testing.T) {
 	if id[8] != '-' || id[13] != '-' || id[18] != '-' || id[23] != '-' {
 		t.Errorf("Dash placement invalid. Should be 8, 13, 18, 23 but is %s", id)
 	}
+	random := rand.Reader
+	rand.Reader = bytes.NewBuffer(nil)
+	_, err = NewString()
+	if err == nil {
+		t.Error("NewString did not fail when no random data was available")
+	}
+	rand.Reader = random
 }
 
 func TestUUID_IsEmpty(t *testing.T) {
