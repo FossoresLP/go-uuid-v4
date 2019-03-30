@@ -3,7 +3,6 @@ package uuid
 import (
 	"crypto/rand"
 	"encoding/hex"
-	"errors"
 	"fmt"
 )
 
@@ -11,39 +10,36 @@ import (
 type UUID [16]byte
 
 // Parse parses a string as a UUID returning either the resulting UUID or an error
-func Parse(str string) (uuid UUID, err error) {
+func Parse(str string) (UUID, error) {
 	if len(str) != 36 {
-		return uuid, fmt.Errorf("Invalid length for UUID: %d", len(str))
+		return UUID{}, fmt.Errorf("Invalid length for UUID: %d", len(str))
 	}
 	if str[8] != '-' || str[13] != '-' || str[18] != '-' || str[23] != '-' {
-		return uuid, errors.New("UUID format invalid")
+		return UUID{}, fmt.Errorf("UUID format invalid")
 	}
-	part1, err := hex.DecodeString(str[:8])
+	uuid := UUID{}
+	in := []byte(str)
+	_, err := hex.Decode(uuid[:4], in[:8])
 	if err != nil {
-		return
+		return UUID{}, fmt.Errorf("UUID did contain unexpected character in segment %d", 1)
 	}
-	part2, err := hex.DecodeString(str[9:13])
+	_, err = hex.Decode(uuid[4:6], in[9:13])
 	if err != nil {
-		return
+		return UUID{}, fmt.Errorf("UUID did contain unexpected character in segment %d", 2)
 	}
-	part3, err := hex.DecodeString(str[14:18])
+	_, err = hex.Decode(uuid[6:8], in[14:18])
 	if err != nil {
-		return
+		return UUID{}, fmt.Errorf("UUID did contain unexpected character in segment %d", 3)
 	}
-	part4, err := hex.DecodeString(str[19:23])
+	_, err = hex.Decode(uuid[8:10], in[19:23])
 	if err != nil {
-		return
+		return UUID{}, fmt.Errorf("UUID did contain unexpected character in segment %d", 4)
 	}
-	part5, err := hex.DecodeString(str[24:36])
+	_, err = hex.Decode(uuid[10:16], in[24:36])
 	if err != nil {
-		return
+		return UUID{}, fmt.Errorf("UUID did contain unexpected character in segment %d", 5)
 	}
-	copy(uuid[:4], part1)
-	copy(uuid[4:6], part2)
-	copy(uuid[6:8], part3)
-	copy(uuid[8:10], part4)
-	copy(uuid[10:16], part5)
-	return
+	return uuid, nil
 }
 
 // ParseBytes parses a byte slice and returns the contained BINARY UUID or an error
@@ -67,17 +63,8 @@ func New() (uuid UUID, err error) {
 }
 
 // ToString returns the string representation of a UUID
-func (uuid *UUID) String() (out string) {
-	out += hex.EncodeToString(uuid[:4])
-	out += "-"
-	out += hex.EncodeToString(uuid[4:6])
-	out += "-"
-	out += hex.EncodeToString(uuid[6:8])
-	out += "-"
-	out += hex.EncodeToString(uuid[8:10])
-	out += "-"
-	out += hex.EncodeToString(uuid[10:16])
-	return
+func (uuid UUID) String() string {
+	return fmt.Sprintf("%x-%x-%x-%x-%x", uuid[:4], uuid[4:6], uuid[6:8], uuid[8:10], uuid[10:16])
 }
 
 // NewString generates a new UUID v4 and converts it to a string immediately
@@ -90,8 +77,8 @@ func NewString() (string, error) {
 }
 
 // IsEmpty returns if the UUID contains only zeros and is therefore empty and invalid
-func (uuid *UUID) IsEmpty() bool {
-	return *uuid == [16]byte{0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0}
+func (uuid UUID) IsEmpty() bool {
+	return uuid == [16]byte{0x0}
 }
 
 // MarshalText provides encoding.TextMarshaler
