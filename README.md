@@ -1,3 +1,5 @@
+**A new package supporting all UUID versions from 1 trough 8 has been released at [FossoresLP/uuid](https://github.com/FossoresLP/uuid) and supersedes this package.**
+
 Go UUIDv4
 =========
 
